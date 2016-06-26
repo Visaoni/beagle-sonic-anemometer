@@ -89,7 +89,11 @@ void SR_transfer_readings()
       while( pru_rpmsg_send( &transport, DST, SRC, buffer + i, len ) != PRU_RPMSG_SUCCESS );
 
       i += MAX_ELEMENTS_TO_TRANSFER;
+
+      __delay_cycles( 1000000 );
    }
+
+   __delay_cycles( 1000000 );
 
    head = 0;
    return;
