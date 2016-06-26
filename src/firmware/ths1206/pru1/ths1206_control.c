@@ -39,6 +39,9 @@ void TC_write( uint32_t value )
    __delay_cycles(1);   // Probably extraneous, needs 2 ns
 }
 
+// For fake-data branch only
+static uint32_t count = 0;
+
 uint32_t TC_read()
 {
    uint32_t result;
@@ -50,6 +53,10 @@ uint32_t TC_read()
    result = read_reg();
    set_pin( PA_RD_BIT );
    __delay_cycles(1);   // Probably extraneous, needs 5 ns delay to CS invalid, but CS tied active
+
+   // For fake-data branch only
+   result = count++;
+
    return result;
 }
 
