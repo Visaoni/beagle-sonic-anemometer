@@ -98,6 +98,16 @@ There's certainly many better ways to do this. For now, this will suffice.</p>
 </ul>
 </li>
 </ul>
+
+<p>The way forward from here seems pretty clear.</p>
+
+<ul>
+<li>RPMsg stuff shouldn't bet too bad, I probably just need to start from a very small/simple example (like one from the pru-support-package, which does work for me) and build it up to what I need.</li>
+<li>Getting the other sensors working is a bit of an unknown, but it is certainly just a local problem.</li>
+<li>Fleshing out the PRU firmware should be relatively straightforward. It's mostly a matter of twiddling the right bits for initialization. The rest is just adding a few basic checks and loops on top of existing code.</li>
+<li>First major unknown will be getting the firmware to actually properly control the THS1206 for real. Unfortunately I don't have a scope, so I'll probably need to go find one.</li>
+<li>Second major unknown will be the pulse detection. The goal here is relatively simple, but the complexity is going to depend a lot on what actually comes out of the hardware.</li>
+</ul>
       </section>
 
     </div>
