@@ -1,6 +1,6 @@
 {
   "name": "Beagle-sonic-anemometer",
   "tagline": "BeagleBone Google Summer of Code 2016 - Sonic Anemometer",
-  "body": "### Sonic Anemometer Blog\r\nWelcome.\r\nThere's certainly many better ways to do this. For now, this will suffice.",
+  "body": "# Sonic Anemometer Blog\r\nWelcome.\r\nThere's certainly many better ways to do this. For now, this will suffice.\r\n\r\n\r\n## Status Update 27/6\r\n+ PRU Firmware\r\n   * Basic first pass done, no testing on actual THS1206 yet\r\n      - Basic initialization/reset\r\n      - Read values as it is available\r\n      - Store values in local RAM\r\n      - Transfer data to ARM with RPMsg using character device (or at least trying)\r\n   * TODO\r\n      - Get data transfer working\r\n      - More extensive configuration\r\n      - Tx triggers\r\n      - Synchronization (can just be a flag in a shared register)\r\n      - Actual hardware testing\r\n+ Other sensors\r\n   * TODO\r\n      - Get existing libs working on my board (works for mentors)\r\n      - Look into using kernel modules where available\r\n      - Check out options like MAVLink\r\n+ Sensor Fusion\r\n   * TODO\r\n      - Pulse detection from ADC results\r\n      - Calculate speed of sound",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }

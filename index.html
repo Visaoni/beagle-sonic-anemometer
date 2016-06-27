@@ -1,53 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Beagle-sonic-anemometer : BeagleBone Google Summer of Code 2016 - Sonic Anemometer">
+    <title>Beagle-sonic-anemometer by Visaoni</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Beagle-sonic-anemometer</title>
   </head>
-
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/Visaoni/beagle-sonic-anemometer">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/Visaoni/beagle-sonic-anemometer/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/Visaoni/beagle-sonic-anemometer/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/Visaoni/beagle-sonic-anemometer">View on GitHub</a>
+    <div class="wrapper">
 
-          <h1 id="project_title">Beagle-sonic-anemometer</h1>
-          <h2 id="project_tagline">BeagleBone Google Summer of Code 2016 - Sonic Anemometer</h2>
+      <section>
+        <div id="title">
+          <h1>Beagle-sonic-anemometer</h1>
+          <p>BeagleBone Google Summer of Code 2016 - Sonic Anemometer</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/Visaoni">Visaoni</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Visaoni/beagle-sonic-anemometer/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Visaoni/beagle-sonic-anemometer/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a id="sonic-anemometer-blog" class="anchor" href="#sonic-anemometer-blog" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sonic Anemometer Blog</h3>
+        <h1>
+<a id="sonic-anemometer-blog" class="anchor" href="#sonic-anemometer-blog" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sonic Anemometer Blog</h1>
 
 <p>Welcome.
 There's certainly many better ways to do this. For now, this will suffice.</p>
+
+<h2>
+<a id="status-update-276" class="anchor" href="#status-update-276" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Status Update 27/6</h2>
+
+<ul>
+<li>PRU Firmware
+
+<ul>
+<li>Basic first pass done, no testing on actual THS1206 yet
+
+<ul>
+<li>Basic initialization/reset</li>
+<li>Read values as it is available</li>
+<li>Store values in local RAM</li>
+<li>Transfer data to ARM with RPMsg using character device (or at least trying)</li>
+</ul>
+</li>
+<li>TODO
+
+<ul>
+<li>Get data transfer working</li>
+<li>More extensive configuration</li>
+<li>Tx triggers</li>
+<li>Synchronization (can just be a flag in a shared register)</li>
+<li>Actual hardware testing</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Other sensors
+
+<ul>
+<li>TODO
+
+<ul>
+<li>Get existing libs working on my board (works for mentors)</li>
+<li>Look into using kernel modules where available</li>
+<li>Check out options like MAVLink</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Sensor Fusion
+
+<ul>
+<li>TODO
+
+<ul>
+<li>Pulse detection from ADC results</li>
+<li>Calculate speed of sound</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
       </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Beagle-sonic-anemometer maintained by <a href="https://github.com/Visaoni">Visaoni</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-      </footer>
     </div>
-
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
-
   </body>
 </html>
