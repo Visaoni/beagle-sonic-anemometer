@@ -17,20 +17,13 @@ endif
 MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 CURRENT_DIR := $(notdir $(patsubst %/,%,$(dir $(MKFILE_PATH))))
 PROJ_NAME=$(CURRENT_DIR)
-LINKER_COMMAND_FILE=./AM335x_PRU.cmd
-LIBS=--library=../lib/rpmsg_lib.lib
-INCLUDE=--include_path=../include --include_path=../include/am335x
-STACK_SIZE=0x100
-HEAP_SIZE=0x100
+INCLUDE=--include_path=../../../include
 GEN_DIR=gen
 
-#Common compiler and linker flags (Defined in 'PRU Optimizing C/C++ Compiler User's Guide)
-CFLAGS=-v3 -O0 --display_error_number --endian=little --hardware_mac=on --obj_directory=$(GEN_DIR) --pp_directory=$(GEN_DIR) -ppd -ppa
-#Linker flags (Defined in 'PRU Optimizing C/C++ Compiler User's Guide)
-LFLAGS=--reread_libs --warn_sections --stack_size=$(STACK_SIZE) --heap_size=$(HEAP_SIZE)
+#Common compiler flags (Defined in 'PRU Optimizing C/C++ Compiler User's Guide)
+CFLAGS=-v3 -O2 --display_error_number --endian=little --hardware_mac=on --obj_directory=$(GEN_DIR) --pp_directory=$(GEN_DIR) -ppd -ppa
 
-TARGET=$(GEN_DIR)/$(PROJ_NAME).out
-MAP=$(GEN_DIR)/$(PROJ_NAME).map
+TARGET=$(GEN_DIR)/$(PROJ_NAME).lib
 SOURCES=$(wildcard *.c)
 #Using .object instead of .obj in order to not conflict with the CCS build process
 OBJECTS=$(patsubst %,$(GEN_DIR)/%,$(SOURCES:.c=.object))
@@ -48,12 +41,12 @@ printEnd:
 	@echo '************************************************************'
 	@echo ''
 
-# Invokes the linker (-z flag) to make the .out file
-$(TARGET): $(OBJECTS) $(LINKER_COMMAND_FILE)
+# Invokes the archiver to make the .lib file
+$(TARGET): $(OBJECTS)
 	@echo ''
 	@echo 'Building target: $@'
-	@echo 'Invoking: PRU Linker'
-	$(PRU_CGT)/bin/clpru $(CFLAGS) -z -i$(PRU_CGT)/lib -i$(PRU_CGT)/include $(LFLAGS) -o $(TARGET) $(OBJECTS) -m$(MAP) $(LINKER_COMMAND_FILE) --library=libc.a $(LIBS)
+	@echo 'Invoking: PRU Archiver'
+	$(PRU_CGT)/bin/arpru r $(TARGET) $(OBJECTS)
 	@echo 'Finished building target: $@'
 	@echo ''
 	@echo 'Output files can be found in the "$(GEN_DIR)" directory'
