@@ -36,6 +36,8 @@
  /*
  Results:
  This works as expected. Uses the same pattern of transfers as the real deal.
+ Works with /dev/rpmsg_31 char device.
+ Receives msg first, then initiates transfer.
  */
 
 #include <stdint.h>
