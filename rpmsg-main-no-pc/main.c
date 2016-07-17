@@ -10,7 +10,7 @@
 
 /*
 Results:
-???
+Locks up the board. pin_control is not the problem (anymore)
 */
 
 
