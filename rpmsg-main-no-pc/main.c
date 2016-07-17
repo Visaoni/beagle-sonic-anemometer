@@ -14,8 +14,14 @@ Locks up the board. pin_control is not the problem (anymore)
 */
 
 
+/*
+Notes:
+stdio.h doesn't matter
+*/
+
 
 #include <stdint.h>
+#include <stdio.h>
 //#include "resource_table_1.h"  // Conflicts at link with #include in store_readings.c
 
 //#include "ths1206_control.h"
@@ -52,8 +58,6 @@ volatile register uint32_t __R31;
 //static uint32_t buffer[ SR_MAX_BUFFER_SIZE ];
 //static size_t head = 0;
 
-struct pru_rpmsg_transport transport;
-uint16_t src, dst;
 
 char xmsg[] = "now?";
 
@@ -61,6 +65,8 @@ char xmsg[] = "now?";
 
 int main(void)
 {
+   struct pru_rpmsg_transport transport;
+   uint16_t src, dst;
    // clear_pin(0);
    // clear_pin(1);
 
@@ -105,7 +111,10 @@ int main(void)
    }
    // set_pin(0);
 
-   while( pru_rpmsg_send(&transport, dst, src, xmsg, sizeof xmsg) != PRU_RPMSG_SUCCESS );
+   while( pru_rpmsg_send(&transport, dst, src, xmsg, sizeof xmsg) != PRU_RPMSG_SUCCESS )
+   {
+      __delay_cycles(1000000);
+   }
 //   pru_rpmsg_send(&transport, dst, src, xmsg, sizeof xmsg);
    // set_pin(1);
 
