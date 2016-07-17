@@ -17,6 +17,7 @@ Locks up the board. pin_control is not the problem (anymore)
 /*
 Notes:
 stdio.h doesn't matter
+buf location doesn't matter
 */
 
 
