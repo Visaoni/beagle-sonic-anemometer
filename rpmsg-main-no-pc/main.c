@@ -61,6 +61,8 @@ volatile register uint32_t __R31;
 
 char xmsg[] = "now?";
 
+uint8_t dummy_buffer[ RPMSG_BUF_SIZE ];
+
 #define READS_PER_ROUND 2000
 
 int main(void)
@@ -74,7 +76,7 @@ int main(void)
 
    volatile uint8_t* status;
 
-   uint8_t dummy_buffer[ RPMSG_BUF_SIZE ];
+   
    uint16_t dummy_len;
 
    // Enable OCP master port access for the PRU
