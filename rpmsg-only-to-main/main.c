@@ -7,6 +7,16 @@
  * Licensed under the MIT License.
  **************************************************************************************/
 
+
+/*
+Results:
+This locks up the whole board somehow.
+Initial lock-ups were thought to be caused by excessive sends.
+However at this point, it seems there may be other causes.
+*/
+
+
+
 #include <stdint.h>
 //#include "resource_table_1.h"  // Conflicts at link with #include in store_readings.c
 
