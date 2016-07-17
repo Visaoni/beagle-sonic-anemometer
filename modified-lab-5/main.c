@@ -40,8 +40,12 @@
  Receives msg first, then initiates transfer.
  */
 
+/*
+Notes: doesn't matter if transport struct etc is global or not
+*/
+
 #include <stdint.h>
-#include <stdio.h>
+// #include <stdio.h>
 #include <pru_cfg.h>
 #include <pru_intc.h>
 #include <rsc_types.h>
@@ -86,13 +90,14 @@ uint8_t payload[RPMSG_BUF_SIZE];
 
 uint8_t msg[ MSG_LEN ];
 
+struct pru_rpmsg_transport transport;
+uint16_t src, dst, len;
+
 /*
  * main.c
  */
 void main(void)
 {
-	struct pru_rpmsg_transport transport;
-	uint16_t src, dst, len;
 	volatile uint8_t *status;
 
 	/* allow OCP master port access by the PRU so the PRU can read external memories */
