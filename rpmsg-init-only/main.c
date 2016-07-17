@@ -10,8 +10,7 @@
 
 /*
 Results:
-This doesn't lock up the board, unlike when the contents of SR_init() are copied in.
-It also still doesn't work.
+This (now? from what I recall this is new) locks up the board.
 */
 
 
@@ -38,12 +37,12 @@ int main(void)
 
    __delay_cycles(100000000);
 
-
-  SR_init();
-  set_pin(0);
+   set_pin(0);
+   SR_init();
+  
 //   TC_init();
 
-  set_pin(1);
+   set_pin(1);
 
 
 //   while(1)
@@ -54,7 +53,7 @@ int main(void)
 ////      set_pin(1);
 //   }
 
-  __halt();
+   __halt();
 
    /* Should never return */
    return 0;

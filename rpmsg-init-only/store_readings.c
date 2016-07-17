@@ -10,13 +10,13 @@
 
 #include "store_readings.h"
 
-//#include <pru_cfg.h>
-//#include <pru_intc.h>
-//#include <rsc_types.h>
-//#include <pru_rpmsg.h>
-//#include "resource_table_1.h"
+#include <pru_cfg.h>
+#include <pru_intc.h>
+#include <rsc_types.h>
+#include <pru_rpmsg.h>
+#include "resource_table_1.h"
 
-#define SR_MAX_BUFFER_SIZE 1750
+// #define SR_MAX_BUFFER_SIZE 1750
 
 #include "pin_control.h"
 
