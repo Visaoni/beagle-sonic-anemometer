@@ -10,7 +10,7 @@
 
 /*
 Results:
-does not lock up board finally. nothing appears at /dev/rpmsg_pru31 though
+works!
 */
 
 
@@ -39,6 +39,7 @@ BUFFER OF SIZE 4 is BAD
 #define SR_MAX_BUFFER_SIZE 1750
 
 volatile register uint32_t __R31;
+volatile register uint32_t __R30;
 
 // Defines mostly lifted from pru-support-package lab5
 #define HOST_INT        ((uint32_t) 1 << 31)
@@ -79,6 +80,7 @@ int main(void)
    uint16_t src, dst;
    // clear_pin(0);
    // clear_pin(1);
+   __R30 = 0;
 
    __delay_cycles(100000000);
 
@@ -107,19 +109,21 @@ int main(void)
 //         && (pru_rpmsg_receive( &transport, &dst, &src, dummy_buffer, &dummy_len ) == PRU_RPMSG_SUCCESS) );
 
 //   set_pin(1);
+   __R30 = 1;
    while(1)
    {
       if( __R31 & HOST_INT )
       {
          CT_INTC.SICR_bit.STS_CLR_IDX = FROM_ARM_HOST;
 
-         if( pru_rpmsg_receive( &transport, &dst, &src, dummy_buffer, &dummy_len ) == PRU_RPMSG_SUCCESS )
+         if( pru_rpmsg_receive( &transport, &src, &dst, dummy_buffer, &dummy_len ) == PRU_RPMSG_SUCCESS )
          {
             break;
          }
       }
    }
    // set_pin(0);
+   __R30 = 2;
 
    while( pru_rpmsg_send(&transport, dst, src, xmsg, sizeof xmsg) != PRU_RPMSG_SUCCESS )
    {
