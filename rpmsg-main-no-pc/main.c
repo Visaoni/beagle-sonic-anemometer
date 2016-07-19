@@ -60,7 +60,7 @@ volatile register uint32_t __R31;
 //static size_t head = 0;
 
 
-char xmsg[] = "now?";
+char xmsg[400];
 
 uint8_t dummy_buffer[ RPMSG_BUF_SIZE ];
 
