@@ -40,7 +40,7 @@ void TC_write( uint32_t value )
 }
 
 // For fake-data branch only
-static uint16_t count = 0;
+static uint16_t count = 0x4141;
 
 uint16_t TC_read()
 {
