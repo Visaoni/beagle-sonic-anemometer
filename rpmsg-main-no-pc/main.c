@@ -10,7 +10,7 @@
 
 /*
 Results:
-Locks up the board. pin_control is not the problem (anymore)
+does not lock up board finally. nothing appears at /dev/rpmsg_pru31 though
 */
 
 
@@ -18,6 +18,7 @@ Locks up the board. pin_control is not the problem (anymore)
 Notes:
 stdio.h doesn't matter
 buf location doesn't matter
+BUFFER OF SIZE 4 is BAD
 */
 
 
@@ -59,8 +60,8 @@ volatile register uint32_t __R31;
 //static uint32_t buffer[ SR_MAX_BUFFER_SIZE ];
 //static size_t head = 0;
 
-
-char xmsg[400];
+#define MSG_LEN 400
+char xmsg[MSG_LEN];
 
 uint8_t dummy_buffer[ RPMSG_BUF_SIZE ];
 
@@ -68,6 +69,12 @@ uint8_t dummy_buffer[ RPMSG_BUF_SIZE ];
 
 int main(void)
 {
+   int x;
+   for( x = 0; x < MSG_LEN; x++ )
+   {
+      xmsg[x] = 'A';
+   }
+
    struct pru_rpmsg_transport transport;
    uint16_t src, dst;
    // clear_pin(0);
