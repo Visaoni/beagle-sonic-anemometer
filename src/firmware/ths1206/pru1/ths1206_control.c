@@ -33,7 +33,6 @@ void TC_init( uint8_t use_defaults )
       TC_write( CSR0_Value );
       TC_write( CSR1_Value );
    }
-   // TODO: set D0-11 to input
 }
 
 void TC_write( uint16_t value )
