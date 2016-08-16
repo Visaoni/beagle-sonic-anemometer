@@ -14,6 +14,7 @@
 import zmq
 import Adafruit_DHT
 import Adafruit_BMP.BMP085 as Adafruit_BMP085
+import math
 import time
 
 # TODO: Take port as input
@@ -63,25 +64,49 @@ def find_windspeed( rel_humidity, temp, pressure, tof ):
    return pulse_speed - est_speed_of_sound( rel_humidity, temp, pressure )
 
 
-# TODO: fill in... and figure out how
+# Based on Bohn, Dennis A. "Environmental effects on the speed of sound." Journal of the Audio Engineering Society 36.4 (1988): 223-231.
 def est_speed_of_sound( rel_humidity, temp, pressure ):
-   return 322.0
+   R = 8.3144598
+
+   temp += 273.15    # Celsius to Kelvin
+   h = rel_humidity * 0.01 * water_vapor_pressure( temp ) / pressure
+   gamma = (7 + h) / (5 + h)
+   M = (29 - (11 * h)) / 10**3
+
+   return math.sqrt( (gamma * R * temp) / M )
+
+# Based on the Antonine approximation
+# TODO: This is only good down to 1C
+def water_vapor_pressure( temp ):
+   A = 8.07131
+   B = 1730.63
+   C = 233.426
+
+   temp -= 273.15          # Kelvin to Celsius
+
+   P = 10 ** (A - (B / (C + temp) ))   # In torrs
+   return P * 133.322
+
 
 
 
 # TODO: Add more frequent updates (IE avoid having to wait on the DHT)
 # Most basic setup possible
 # Loop through and grab all sensor readings then analyze
-while True:
-   rel_humidity, temp = get_rel_humidity_temp()
-   pressure = get_pressure()
-   tof = get_tof()
+def run():
+   while True:
+      rel_humidity, temp = get_rel_humidity_temp()
+      pressure = get_pressure()
+      tof = get_tof()
 
-   # TODO: calculate wind speed
+      print( "Humidity:    " + str(rel_humidity) )
+      print( "Temperature: " + str(temp) )
+      print( "ToF:         " + str(tof) )
+      print( "Wind speed:  " + str(find_windspeed( rel_humidity, temp, pressure, tof )) )
 
-   print( "Humidity:    " + str(rel_humidity) )
-   print( "Temperature: " + str(temp) )
-   print( "ToF:         " + str(tof) )
-   print( "Wind speed:  " + str(find_windspeed( rel_humidity, temp, pressure, tof )) )
+      time.sleep(2) # Wait for DHT
 
-   time.sleep(2) # Wait for DHT
+
+
+if __name__ == "__main__":
+   run()
