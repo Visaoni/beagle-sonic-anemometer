@@ -67,7 +67,8 @@ MAIN_LOOP:
   sbbo WRITE_POINTER, SHARED_RAM, OFFSET(Params.shared_ptr), SIZE(Params.shared_ptr)
 
   // Read channel 0 into the lower half of the sample register
-  mov SAMPLE.w0, r31.w0
+  // mov SAMPLE.w0, r31.w0
+  add SAMPLE.w0, SAMPLE.w0, 1
 
   // Wait for falling clock edge
   wbc r31, 11
@@ -83,7 +84,8 @@ MAIN_LOOP:
 DIDNT_WRAP:
 
   // Read channel 1 into the upper half of the sample register
-  mov SAMPLE.w2, r31.w0
+  // mov SAMPLE.w2, r31.w0
+  add SAMPLE.w2, SAMPLE.w2, 1
 
   qba MAIN_LOOP
 
